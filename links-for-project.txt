@@ -1,0 +1,3 @@
+profile-card-1 (dog): https://codepen.io/legeoffrey/pen/EaNXew
+profile-card-2 : https://codepen.io/alishahab/pen/ZGozqW
+profile-card-3: https://codepen.io/CodeLvlUp/pen/aNGNBp

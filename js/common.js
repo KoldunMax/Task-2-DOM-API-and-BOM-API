@@ -8,7 +8,7 @@ var headerTags = document.getElementsByClassName("tag");
 var options = selectSort.getElementsByTagName("option")
 var removeCard = document.addEventListener("remove-card-btn")[0];
 
-console.log(removeCard);
+console.log(options);
 
 fetch("https://api.myjson.com/bins/152f9j")
     .then((res) => res.json())

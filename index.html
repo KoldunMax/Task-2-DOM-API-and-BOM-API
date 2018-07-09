@@ -7,11 +7,78 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="shortcut icon" href="img/js-logo.jpg" />
 	<link rel="stylesheet" href="css/normalize.css">
-
-
+	<link rel="stylesheet" href="css/colors.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/select-header.css">
+	<link rel="stylesheet" href="css/header.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/footer.css">	
+	<link rel="stylesheet" href="css/media-queries.css">
 	<script src="js/common.js" defer></script>
+	<script src="js/tags.js" defer></script>
 </head>
 <body>
-	
+
+	<header>
+
+		<input type="text" id="input-seatch-titles" placeholder="Search" title="Type in a name" >
+
+		<div class="tags-wrapper">
+
+			<div class="tags-input" data-name="tags-input">
+					<span class="tag">Business<span class="close"></span></span>
+					<span class="tag">Culture<span class="close"></span></span>
+					<span class="tag">Politics<span class="close"></span></span>
+					<!--
+					<span class="tag">JavaScript<span class="close"></span></span>
+					<span class="tag">HTML<span class="close"></span></span> -->
+			</div>
+		
+			<a href="#" class="add-tags-link">Add tags</a>
+			<button class="done-close-btn">Done</button>
+
+		</div>
+
+		<button class="start-sorted-tags">Sort By Tags</button>
+
+		<div class="center-on-page">
+			<div class="select">
+				<select name="slct" id="slct">
+					<option value="1">Recently Updated</option>
+					<option value="2">Least resently updated</option>
+				</select>
+			</div>
+		</div>
+
+	</header>
+
+	<main>	
+
+	</main>
+
+	<footer>
+		<div class="helps-link">
+
+				<ul>
+					<li><a href="#"><img src="img/logo-footer.png" alt="logo-image"></a></li>
+					<li><a href="#">Help</a></li>
+					<li><a href="#">About US</a></li>
+					<li><a href="#">Why our service</a></li>
+					<li><a href="#">FeedBack</a></li>
+				</ul>	
+
+				<div class="footer-item-social">
+					<a href="#" class="fa fa-twitter"></a>
+					<a href="#" class="fa fa-facebook"></a>
+					<a href="#" class="fa fa-youtube"></a>
+					<a href="#" class="fa fa-soundcloud"></a>
+					<a href="#" class="fa fa-pinterest"></a>
+				</div>
+
+				<span>Copyright© Koldun. All rights reserved.</span>
+
+			</div>
+	</footer>
+
 </body>
 </html>

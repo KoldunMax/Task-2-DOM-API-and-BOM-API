@@ -1,0 +1,79 @@
+@media all and (max-width: 425px) {
+    .done-close-btn {
+        padding: 6px 5px;
+    }
+
+    header a.add-tags-link {
+        font-size: 0.7em;
+    }
+
+}
+
+@media all and (min-width: 320px) and (max-width: 768px) {
+    footer .helps-link {
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	footer .helps-link ul {
+		order: 1;
+	}
+
+	.footer-item-social {
+		order: 2;
+		margin: auto;
+	}
+
+	.footer-item-social a {
+		justify-items: center;
+	}
+
+	footer .helps-link span {
+		order: 3;
+		display: inline-block;
+		margin: auto;
+	}
+}
+
+@media all and (max-width: 768px) {
+    .center-on-page {
+        width: 80%;
+    }
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+	main {
+		grid-template-columns: 1fr 1fr;
+		justify-content: space-evenly;	
+	}
+	.wrapper-profile-card {
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+}
+
+@media all and (min-width: 1024px) {
+	main {
+		grid-template-columns: repeat(5, auto);
+		justify-content: space-evenly;	
+	}
+	.wrapper-profile-card .title-profile {
+		margin: 5px;
+	}
+
+	.wrapper-profile-card {
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+	.wrapper-profile-card p.description-text-profile {
+		overflow: hidden;
+    	display: -webkit-box;
+    	-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical; 
+	}
+
+	.wrapper-profile-card .tags-profile .tag-profile {
+		font-size: 12px;
+		padding: 5px 6px;
+	}
+}

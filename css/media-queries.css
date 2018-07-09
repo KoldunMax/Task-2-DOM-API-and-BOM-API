@@ -42,7 +42,7 @@
 }
 
 @media all and (min-width: 768px) and (max-width: 1024px) {
-	.wrapper-profile-cards {
+	main {
 		grid-template-columns: 1fr 1fr;
 		justify-content: space-evenly;	
 	}
@@ -53,7 +53,7 @@
 }
 
 @media all and (min-width: 1024px) {
-	.wrapper-profile-cards {
+	main {
 		grid-template-columns: repeat(5, auto);
 		justify-content: space-evenly;	
 	}

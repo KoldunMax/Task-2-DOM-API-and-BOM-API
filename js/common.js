@@ -6,9 +6,7 @@ var selectSort = document.getElementsByName("slct")[0];
 var startSorting = document.getElementsByClassName("start-sorted-tags")[0];
 var headerTags = document.getElementsByClassName("tag");
 var options = selectSort.getElementsByTagName("option")
-var removeCard = document.addEventListener("remove-card-btn")[0];
-
-console.log(options);
+var removeCard = document.getElementsByClassName("remove-card-btn");
 
 fetch("https://api.myjson.com/bins/152f9j")
     .then((res) => res.json())
@@ -114,62 +112,97 @@ fetch("https://api.myjson.com/bins/152f9j")
 
         showtoDisplay(sortedDataUpDown);
 
+        for(let i = 0; i < mainData.length; i++) {
+            removeCard[i].addEventListener("click", () => {
+                mainData[i].deleteItem = 1
+                showtoDisplay(sortedDataUpDown);
+            });
+        }
+
+        function deleteItemsfunc(collection) {
+
+        }
+
         function showtoDisplay(arrayForShow) {
-            let outPut = `<div class="wrapper-profile-cards">`;
+            let outPut = "";//`<div class="wrapper-profile-cards">`;
 
             for(let i = 0; i < arrayForShow.length; i++) {
-                outPut += `<div class="wrapper-profile-card">
-    
-                    <h4 class="title-profile"><i class="fa fa-id-card-o" aria-hidden="true"></i> ${arrayForShow[i].title}</h4>
-    
-                    <img class="wrapper-img" src=${arrayForShow[i].image} alt="front-img">
-                        
-                    <div class="wrapper-description-tags-date">
-    
-                        <h5 class="description-title-profile" >Description: <i class="fa fa-file-text-o" aria-hidden="true"></i></h5>
-    
-                        <p class="description-text-profile" >${arrayForShow[i].description}</p>
-                        <p class="date-profile"><i class="fa fa-calendar" aria-hidden="true"></i> <span>`;
-                        
-                        let date = new Date(arrayForShow[i].createdAt);
-    
-                        var mm = date.getMonth(); 
-                        var dd = date.getDate();
-                        var hh = date.getHours();
-                        var min = date.getMinutes();
-                        var sec = date.getSeconds();
-    
-                        var mS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']; 
-    
-                        outPut += `${[  (hh>9 ? '' : '0') + hh + 'h', 
-                                        (min>9 ? '' : '0') + min + 'm', 
-                                        (sec>9 ? '' : '0') + sec + 's',
-                                        (dd>9 ? '' : '0') + dd,
-                                        mS[+((mm>9 ? '' : '0') + mm)],
-                                        date.getFullYear()
-                                    ].join(', ')} </span></p>
-                                            
-                        <ul class="tags-profile">`;
-    
-                        for(let j = 0; j < arrayForShow[i].tags.length; j++) {
-                            outPut += `<li class="tag-profile">${arrayForShow[i].tags[j]}</li>`
-                        }
+                        outPut += `<div class="wrapper-profile-card">
+        
+                        <h4 class="title-profile"><i class="fa fa-id-card-o" aria-hidden="true"></i> ${arrayForShow[i].title}</h4>
+        
+                        <img class="wrapper-img" src=${arrayForShow[i].image} alt="front-img">
                             
-                        outPut += `</ul><div class="remove-card-btn"><i class="fa fa-trash-o"></i></div>
-    
-                    </div>
-    
-                </div>`;
+                        <div class="wrapper-description-tags-date">
+        
+                            <h5 class="description-title-profile" >Description: <i class="fa fa-file-text-o" aria-hidden="true"></i></h5>
+        
+                            <p class="description-text-profile" >${arrayForShow[i].description}</p>
+                            <p class="date-profile"><i class="fa fa-calendar" aria-hidden="true"></i> <span>`;
+                            
+                            let date = new Date(arrayForShow[i].createdAt);
+        
+                            var mm = date.getMonth(); 
+                            var dd = date.getDate();
+                            var hh = date.getHours();
+                            var min = date.getMinutes();
+                            var sec = date.getSeconds();
+        
+                            var mS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']; 
+        
+                            outPut += `${[  (hh>9 ? '' : '0') + hh + 'h', 
+                                            (min>9 ? '' : '0') + min + 'm', 
+                                            (sec>9 ? '' : '0') + sec + 's',
+                                            (dd>9 ? '' : '0') + dd,
+                                            mS[+((mm>9 ? '' : '0') + mm)],
+                                            date.getFullYear()
+                                        ].join(', ')} </span></p>
+                                                
+                            <ul class="tags-profile">`;
+        
+                            for(let j = 0; j < arrayForShow[i].tags.length; j++) {
+                                outPut += `<li class="tag-profile">${arrayForShow[i].tags[j]}</li>`
+                            }
+                                
+                            outPut += `</ul><div class="remove-card-btn"><i class="fa fa-trash-o"></i></div>
+        
+                        </div>
+        
+                    </div>`;
+                
+                
 
-                if((i + 1) % 10 == 0 && arrayForShow.length != i ) {
-                    outPut += `</div><div class="wrapper-profile-cards">`;
-                }
+        //        if((i + 1) % 10 == 0 && arrayForShow.length != i ) {
+         //           outPut += `</div><div class="wrapper-profile-cards">`;
+           //     }
             }
-            if(arrayForShow.length%9 != 0) {
-                outPut += `</div>`;
-            }
+         //   if(arrayForShow.length%9 != 0) {
+          //      outPut += `</div>`;
+          //  }
             main.innerHTML = outPut;
         }
+
+
+        function filterByTyping() {
+            var input, filter, title;
+            var progileCard = document.getElementsByClassName("wrapper-profile-card");
+ //           progileCard[0].style.display = "";
+            input = document.getElementById("input-seatch-titles");
+            filter = input.value.toUpperCase();
+            titles = document.getElementsByClassName("title-profile");
+            console.log(titles[0].innerText.toUpperCase().indexOf(filter) > -1);
+            progileCard[0].style.display = "none";
+            console.log(input.value);
+            for (let i = 0; i < titles.length; i++) {
+                if (titles[i].innerText.toUpperCase().indexOf(filter) > -1 || filter.length == 0) {
+                    progileCard[i].style.display = "grid";
+                } else {
+                    progileCard[i].style.display = "none";
+                }
+            }
+        }
+        
+        document.getElementById("input-seatch-titles").addEventListener("keyup", filterByTyping);
 
     })
     .catch((err) => console.log(err))
@@ -177,4 +210,5 @@ fetch("https://api.myjson.com/bins/152f9j")
 let getTenCards = document.getElementsByClassName("wrapper-profile-cards");
 
 let getCards = document.getElementsByClassName("wrapper-profile-card");
+
 

@@ -44,81 +44,17 @@ fetch("https://api.myjson.com/bins/152f9j")
             return B.coincidence - A.coincidence;
         }
 
-        let sortedByTags = Object.assign([], mainData);
-
-        startSorting.addEventListener("click", sortedByTagsFunc);
-
-        function sortedByTagsFunc() {
-
-            for(let k = 0; k < sortedByTags.length; k++) {
-                sortedByTags[k].coincidence = 0;
-            }
-
-            tags = [];
-            if(headerTags.length > 0) {
-                for(let iTag = 0; iTag < headerTags.length; iTag++) {
-                    tags.push(headerTags[iTag].innerText);
-                }
-                console.log(tags);
-            }
-
-            //"Business","Culture","Politics"
-
-            for(let i = 0; i < sortedByTags.length; i++) {
-                for(let k = 0; k < tags.length; k++) {
-                    for(let j = 0; j < sortedByTags[i].tags.length; j++) {
-                        if(sortedByTags[i].tags[j].toLowerCase() == tags[k].toLowerCase()) {
-                            sortedByTags[i].coincidence += 1;
-                        }
-                    }
-                }
-            }
-
-            sortedByTags.sort(compareTags)
-            let sosortedByTagsandDate = [];
-
-            for(let i = sortedByTags[0].coincidence; i >= 0; i--) {
-                let arrayforsorting = [];
-                for(let j = 0; j < sortedByTags.length; j++) {
-                    if(i == sortedByTags[j].coincidence) {
-                        arrayforsorting.push(sortedByTags[j]);
-                    }
-                }
-                arrayforsorting.sort(compareDateUpDown);
-
-                for(let k = 0; k < arrayforsorting.length; k++) {
-                    sosortedByTagsandDate.push(arrayforsorting[k]);
-                }
-            }
-
-            mainData = Object.assign([], sosortedByTagsandDate);
-
-            showtoDisplay(mainData);
-        }
-
         let sortedDataUpDown = Object.assign([], mainData);
         sortedDataUpDown.sort(compareDateUpDown);
 
         let sortedDataDownUp = Object.assign([], mainData);
         sortedDataDownUp.sort(compareDateDownUp);
-        
-   
-        selectSort.addEventListener("click", function() {
-            if(selectSort.value == 1) {
-                mainData = Object.assign([], sortedDataUpDown);
-                showtoDisplay(mainData);
-            } else {
-                mainData = Object.assign([], sortedDataDownUp);
-                showtoDisplay(mainData);
-            }
-        });
-        
-
+                
         showtoDisplay(mainData);
 
         for(let i = 0; i < mainData.length; i++) {
             removeCard[i].addEventListener("click", () => {
-                mainData[i].deleteItem = 1
+                mainData.splice(i, 1);
                 showtoDisplay(mainData);
             });
         }
@@ -131,7 +67,6 @@ fetch("https://api.myjson.com/bins/152f9j")
             let outPut = "";//`<div class="wrapper-profile-cards">`;
 
             for(let i = 0; i < arrayForShow.length; i++) {
-                    if(arrayForShow[i].deleteItem != 1) {
                         
                         outPut += `<div class="wrapper-profile-card">
         
@@ -175,7 +110,7 @@ fetch("https://api.myjson.com/bins/152f9j")
                         </div>
         
                     </div>`;
-                    }
+                    
 
         //        if((i + 1) % 10 == 0 && arrayForShow.length != i ) {
          //           outPut += `</div><div class="wrapper-profile-cards">`;
@@ -185,8 +120,75 @@ fetch("https://api.myjson.com/bins/152f9j")
           //      outPut += `</div>`;
           //  }
             main.innerHTML = outPut;
-        }
 
+            for(let i = 0; i < mainData.length; i++) {
+                removeCard[i].addEventListener("click", () => {
+                    mainData.splice(i, 1);
+                    showtoDisplay(mainData);
+                });
+            }
+
+            let sortedByTags = Object.assign([], mainData);
+
+            startSorting.addEventListener("click", sortedByTagsFunc);
+
+            function sortedByTagsFunc() {
+
+                for(let k = 0; k < sortedByTags.length; k++) {
+                    sortedByTags[k].coincidence = 0;
+                }
+    
+                tags = [];
+                if(headerTags.length > 0) {
+                    for(let iTag = 0; iTag < headerTags.length; iTag++) {
+                        tags.push(headerTags[iTag].innerText);
+                    }
+                }
+    
+                //"Business","Culture","Politics"
+    
+                for(let i = 0; i < sortedByTags.length; i++) {
+                    for(let k = 0; k < tags.length; k++) {
+                        for(let j = 0; j < sortedByTags[i].tags.length; j++) {
+                            if(sortedByTags[i].tags[j].toLowerCase() == tags[k].toLowerCase()) {
+                                sortedByTags[i].coincidence += 1;
+                            }
+                        }
+                    }
+                }
+    
+                sortedByTags.sort(compareTags)
+                let sosortedByTagsandDate = [];
+    
+                for(let i = sortedByTags[0].coincidence; i >= 0; i--) {
+                    let arrayforsorting = [];
+                    for(let j = 0; j < sortedByTags.length; j++) {
+                        if(i == sortedByTags[j].coincidence) {
+                            arrayforsorting.push(sortedByTags[j]);
+                        }
+                    }
+                    arrayforsorting.sort(compareDateUpDown);
+    
+                    for(let k = 0; k < arrayforsorting.length; k++) {
+                        sosortedByTagsandDate.push(arrayforsorting[k]);
+                    }
+                }
+    
+                mainData = Object.assign([], sosortedByTagsandDate);
+    
+                showtoDisplay(mainData);
+            }
+
+            selectSort.addEventListener("click", function() {
+                if(selectSort.value == 1) {
+                    mainData = Object.assign([], sortedDataUpDown);
+                    showtoDisplay(mainData);
+                } else {
+                    mainData = Object.assign([], sortedDataDownUp);
+                    showtoDisplay(mainData);
+                }
+            });
+        }
 
         function filterByTyping() {
             var input, filter, title;
@@ -195,9 +197,7 @@ fetch("https://api.myjson.com/bins/152f9j")
             input = document.getElementById("input-seatch-titles");
             filter = input.value.toUpperCase();
             titles = document.getElementsByClassName("title-profile");
-            console.log(titles[0].innerText.toUpperCase().indexOf(filter) > -1);
             progileCard[0].style.display = "none";
-            console.log(input.value);
             for (let i = 0; i < titles.length; i++) {
                 if (titles[i].innerText.toUpperCase().indexOf(filter) > -1 || filter.length == 0) {
                     progileCard[i].style.display = "grid";

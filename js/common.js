@@ -62,7 +62,9 @@ fetch("https://api.myjson.com/bins/152f9j")
             let outPut = "";//`<div class="wrapper-profile-cards">`;
             console.log(arrayForShow.length);
             for(let i = 0; i < arrayForShow.length; i++) {
-
+                        if(numberOfElement==0) {
+                            numberOfElement = 10;
+                        }
                         if(i < numberOfElement) {
 
                             outPut += `<div class="wrapper-profile-card">
@@ -112,9 +114,11 @@ fetch("https://api.myjson.com/bins/152f9j")
             }
             window.onscroll = function() {
                 var scrolled = window.pageYOffset || document.documentElement.scrollTop;
-             //   console.log(scrolled);
-             //   console.log(document.body.scrollHeight);
-             //   console.log(numberOfElement)
+
+                console.log(scrolled);
+                console.log(document.body.scrollHeight);
+                console.log(numberOfElement);
+
                 if(!document.getElementById("input-seatch-titles").value) {
                     if(document.body.scrollHeight - scrolled < 800 && document.body.scrollWidth >= 1024) {
                         numberOfElement += 10;
@@ -129,11 +133,34 @@ fetch("https://api.myjson.com/bins/152f9j")
                         numberOfElement -= 10;
                         showtoDisplay(mainData, numberOfElement);
                     }
+
+                    
     
                     if(document.body.scrollHeight - scrolled < 500 && document.body.scrollWidth >= 768 && document.body.scrollWidth < 1024) {
                         numberOfElement += 10;
                         showtoDisplay(mainData, numberOfElement);
                     } 
+
+                    if(document.body.scrollHeight - scrolled > 5500 && document.body.scrollWidth >= 425 && document.body.scrollWidth < 768) {
+                        numberOfElement -= 10;
+                        showtoDisplay(mainData, numberOfElement);
+                    }
+
+                    if(document.body.scrollHeight - scrolled < 600 && document.body.scrollWidth >= 425 && document.body.scrollWidth < 768) {
+                        numberOfElement += 10;
+                        showtoDisplay(mainData, numberOfElement);
+                    } 
+
+                    if(document.body.scrollHeight - scrolled > 5500 && document.body.scrollWidth >= 320 && document.body.scrollWidth < 768) {
+                        numberOfElement -= 10;
+                        showtoDisplay(mainData, numberOfElement);
+                    }
+
+                    if(document.body.scrollHeight - scrolled < 600 && document.body.scrollWidth >= 320 && document.body.scrollWidth < 768) {
+                        numberOfElement += 10;
+                        showtoDisplay(mainData, numberOfElement);
+                    } 
+                     
                 }
                 
 

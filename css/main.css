@@ -89,3 +89,29 @@ main {
 .wrapper-profile-card .tags-profile .tag-profile:hover {
     opacity: 1;
 }
+
+.start-sorted-tags {
+    padding: 10px 12px;
+    margin: auto;
+    margin-top: 30px;
+    background-color: var(--AccentColorLighten);
+    opacity: 0.7;
+    border: solid 2px black;
+    border-radius: 4px;
+    color: black;
+    width: 40%;
+    font: bold 100% "century gothic", arial, sans-serif;
+}
+
+.remove-card-btn {
+    padding: 5px;
+    color: grey;
+    width: 14px;
+    height: 14px;
+    float: right;
+    cursor: pointer;
+}
+
+.remove-card-btn:hover {
+    color: red;
+}

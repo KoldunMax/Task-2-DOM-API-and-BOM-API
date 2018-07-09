@@ -6,8 +6,9 @@ var selectSort = document.getElementsByName("slct")[0];
 var startSorting = document.getElementsByClassName("start-sorted-tags")[0];
 var headerTags = document.getElementsByClassName("tag");
 var options = selectSort.getElementsByTagName("option")
+var removeCard = document.addEventListener("remove-card-btn")[0];
 
-console.log(options);
+console.log(removeCard);
 
 fetch("https://api.myjson.com/bins/152f9j")
     .then((res) => res.json())
@@ -66,7 +67,7 @@ fetch("https://api.myjson.com/bins/152f9j")
             for(let i = 0; i < sortedByTags.length; i++) {
                 for(let k = 0; k < tags.length; k++) {
                     for(let j = 0; j < sortedByTags[i].tags.length; j++) {
-                        if(sortedByTags[i].tags[j] == tags[k]) {
+                        if(sortedByTags[i].tags[j].toLowerCase() == tags[k].toLowerCase()) {
                             sortedByTags[i].coincidence += 1;
                         }
                     }
@@ -154,7 +155,7 @@ fetch("https://api.myjson.com/bins/152f9j")
                             outPut += `<li class="tag-profile">${arrayForShow[i].tags[j]}</li>`
                         }
                             
-                        outPut += `</ul>
+                        outPut += `</ul><div class="remove-card-btn"><i class="fa fa-trash-o"></i></div>
     
                     </div>
     

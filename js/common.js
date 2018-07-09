@@ -38,6 +38,8 @@ fetch("https://api.myjson.com/bins/152f9j")
             return date2 - date1;
         }//coincidence
 
+        mainData.sort(compareDateUpDown);
+
         function compareTags(A, B) {
             return B.coincidence - A.coincidence;
         }
@@ -89,9 +91,9 @@ fetch("https://api.myjson.com/bins/152f9j")
                 }
             }
 
-            console.log(sosortedByTagsandDate);
+            mainData = Object.assign([], sosortedByTagsandDate);
 
-            showtoDisplay(sosortedByTagsandDate);
+            showtoDisplay(mainData);
         }
 
         let sortedDataUpDown = Object.assign([], mainData);
@@ -103,19 +105,21 @@ fetch("https://api.myjson.com/bins/152f9j")
    
         selectSort.addEventListener("click", function() {
             if(selectSort.value == 1) {
-                showtoDisplay(sortedDataUpDown);
+                mainData = Object.assign([], sortedDataUpDown);
+                showtoDisplay(mainData);
             } else {
-                showtoDisplay(sortedDataDownUp);
+                mainData = Object.assign([], sortedDataDownUp);
+                showtoDisplay(mainData);
             }
         });
         
 
-        showtoDisplay(sortedDataUpDown);
+        showtoDisplay(mainData);
 
         for(let i = 0; i < mainData.length; i++) {
             removeCard[i].addEventListener("click", () => {
                 mainData[i].deleteItem = 1
-                showtoDisplay(sortedDataUpDown);
+                showtoDisplay(mainData);
             });
         }
 
@@ -127,6 +131,8 @@ fetch("https://api.myjson.com/bins/152f9j")
             let outPut = "";//`<div class="wrapper-profile-cards">`;
 
             for(let i = 0; i < arrayForShow.length; i++) {
+                    if(arrayForShow[i].deleteItem != 1) {
+                        
                         outPut += `<div class="wrapper-profile-card">
         
                         <h4 class="title-profile"><i class="fa fa-id-card-o" aria-hidden="true"></i> ${arrayForShow[i].title}</h4>
@@ -169,8 +175,7 @@ fetch("https://api.myjson.com/bins/152f9j")
                         </div>
         
                     </div>`;
-                
-                
+                    }
 
         //        if((i + 1) % 10 == 0 && arrayForShow.length != i ) {
          //           outPut += `</div><div class="wrapper-profile-cards">`;

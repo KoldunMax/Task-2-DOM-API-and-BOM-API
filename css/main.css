@@ -1,0 +1,91 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    justify-content: space-around;
+    overflow: hidden;
+}
+
+.wrapper-profile-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    justify-content: space-around;
+    overflow: hidden;
+}
+
+.wrapper-profile-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    border: 2px solid black;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 8px;
+}
+
+.wrapper-profile-card .title-profile {
+    grid-column: 1 / -1;
+    background-color: #ccc;
+    color: black;
+    justify-self: center;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    width: 90%;
+    height: 65px;
+}
+
+.wrapper-profile-card .wrapper-img {
+    justify-self: center;
+}
+
+.wrapper-profile-card .description-title-profile {
+    margin-bottom: 0;
+}
+
+.wrapper-profile-card .wrapper-description-tags-date {
+    justify-self: start;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.wrapper-profile-card p.description-text-profile {
+    text-align: justify;
+    font-size: 13x;
+}
+
+.wrapper-profile-card .date-profile {
+    margin-top: 20px;
+}
+
+.wrapper-profile-card .date-profile i{
+    margin-right: 5px;
+    color: grey;
+}
+
+.wrapper-profile-card .tags-profile {
+    list-style-type: none;
+    display: inline-block;
+    justify-self: start;
+    padding: 0;
+    margin: 0;
+}
+
+.wrapper-profile-card .tags-profile .tag-profile {
+    float: left;
+    padding: 10px 12px 10px 12px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    background-color: var(--AccentColorLighten);
+    border-radius: 4px;
+    opacity: .8;
+    transition: .5s;
+    cursor: pointer;
+}
+.wrapper-profile-card .tags-profile .tag-profile:hover {
+    opacity: 1;
+}

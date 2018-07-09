@@ -6,10 +6,11 @@ header {
     z-index: 1;
     grid-row-gap: 10px;
     width: 100%;
+    
 }
 
 #input-seatch-titles {
-    background-image: url('/img/search-icon.png');
+    background-image: url(https://image.flaticon.com/icons/svg/70/70376.svg);
     background-position: 10px 12px;
     background-repeat: no-repeat;
     background-size: 1em;
@@ -99,4 +100,21 @@ header {
     outline: 0;
     padding: 0.5em 0.1em;
     width: 40%;
+}
+
+.start-sorted-tags {
+    opacity: .7;
+    background-color: var(--AccentColorLighten);
+    border: 2px solid black;
+    padding: 7px 8px;
+    color: black;
+    width: 40%;
+    margin: auto;
+    margin-top: 25px;
+    cursor: pointer;
+    font: bold 120% "century gothic", arial, sans-serif;
+}
+
+.start-sorted-tags:hover {
+    opacity: .8;
 }

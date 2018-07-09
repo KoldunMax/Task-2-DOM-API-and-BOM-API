@@ -3,7 +3,7 @@ footer {
 	display: flex;
 	flex-direction: column;
 	background: linear-gradient(to bottom, var(--AccentColor, white), var(--AccentColorDarken, white));
-    justify-content: space-around; 
+	justify-content: space-around; 
 }
 
 .helps-link {

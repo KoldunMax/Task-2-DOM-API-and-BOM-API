@@ -41,5 +41,39 @@
     }
 }
 
-@media all and (min-width: 768px) {
+@media all and (min-width: 768px) and (max-width: 1024px) {
+	.wrapper-profile-cards {
+		grid-template-columns: 1fr 1fr;
+		justify-content: space-evenly;	
+	}
+	.wrapper-profile-card {
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+}
+
+@media all and (min-width: 1024px) {
+	.wrapper-profile-cards {
+		grid-template-columns: repeat(5, auto);
+		justify-content: space-evenly;	
+	}
+	.wrapper-profile-card .title-profile {
+		margin: 5px;
+	}
+
+	.wrapper-profile-card {
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+	.wrapper-profile-card p.description-text-profile {
+		overflow: hidden;
+    	display: -webkit-box;
+    	-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical; 
+	}
+
+	.wrapper-profile-card .tags-profile .tag-profile {
+		font-size: 12px;
+		padding: 5px 6px;
+	}
 }

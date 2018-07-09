@@ -124,12 +124,19 @@ fetch("https://api.myjson.com/bins/152f9j")
     
         }
 
-        
-        let sortedByTags = Object.assign([], mainData);
+        selectSort.addEventListener("click", function() {
+            if(selectSort.value == 1) {
+                showtoDisplay(mainData.sort(compareDateUpDown));
+            } else {
+                showtoDisplay(mainData.sort(compareDateDownUp));
+            }
+        });
 
         startSorting.addEventListener("click", sortedByTagsFunc);
 
         function sortedByTagsFunc() {
+
+            let sortedByTags = Object.assign([], mainData);
 
             for(let k = 0; k < sortedByTags.length; k++) {
                 sortedByTags[k].coincidence = 0;
@@ -175,14 +182,6 @@ fetch("https://api.myjson.com/bins/152f9j")
 
             showtoDisplay(mainData);
         }
-
-        selectSort.addEventListener("click", function() {
-            if(selectSort.value == 1) {
-                showtoDisplay(mainData.sort(compareDateUpDown));
-            } else {
-                showtoDisplay(mainData.sort(compareDateDownUp));
-            }
-        });
 
         function filterByTyping() {
             var input, filter, title;

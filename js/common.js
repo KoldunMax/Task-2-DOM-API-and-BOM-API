@@ -43,12 +43,6 @@ fetch("https://api.myjson.com/bins/152f9j")
         function compareTags(A, B) {
             return B.coincidence - A.coincidence;
         }
-
-        let sortedDataUpDown = Object.assign([], mainData);
-        sortedDataUpDown.sort(compareDateUpDown);
-
-        let sortedDataDownUp = Object.assign([], mainData);
-        sortedDataDownUp.sort(compareDateDownUp);
                 
         showtoDisplay(mainData);
 
@@ -127,68 +121,68 @@ fetch("https://api.myjson.com/bins/152f9j")
                     showtoDisplay(mainData);
                 });
             }
+    
+        }
 
-            let sortedByTags = Object.assign([], mainData);
+        
+        let sortedByTags = Object.assign([], mainData);
 
-            startSorting.addEventListener("click", sortedByTagsFunc);
+        startSorting.addEventListener("click", sortedByTagsFunc);
 
-            function sortedByTagsFunc() {
+        function sortedByTagsFunc() {
 
-                for(let k = 0; k < sortedByTags.length; k++) {
-                    sortedByTags[k].coincidence = 0;
-                }
-    
-                tags = [];
-                if(headerTags.length > 0) {
-                    for(let iTag = 0; iTag < headerTags.length; iTag++) {
-                        tags.push(headerTags[iTag].innerText);
-                    }
-                }
-    
-                //"Business","Culture","Politics"
-    
-                for(let i = 0; i < sortedByTags.length; i++) {
-                    for(let k = 0; k < tags.length; k++) {
-                        for(let j = 0; j < sortedByTags[i].tags.length; j++) {
-                            if(sortedByTags[i].tags[j].toLowerCase() == tags[k].toLowerCase()) {
-                                sortedByTags[i].coincidence += 1;
-                            }
-                        }
-                    }
-                }
-    
-                sortedByTags.sort(compareTags)
-                let sosortedByTagsandDate = [];
-    
-                for(let i = sortedByTags[0].coincidence; i >= 0; i--) {
-                    let arrayforsorting = [];
-                    for(let j = 0; j < sortedByTags.length; j++) {
-                        if(i == sortedByTags[j].coincidence) {
-                            arrayforsorting.push(sortedByTags[j]);
-                        }
-                    }
-                    arrayforsorting.sort(compareDateUpDown);
-    
-                    for(let k = 0; k < arrayforsorting.length; k++) {
-                        sosortedByTagsandDate.push(arrayforsorting[k]);
-                    }
-                }
-    
-                mainData = Object.assign([], sosortedByTagsandDate);
-    
-                showtoDisplay(mainData);
+            for(let k = 0; k < sortedByTags.length; k++) {
+                sortedByTags[k].coincidence = 0;
             }
 
-            selectSort.addEventListener("click", function() {
-                if(selectSort.value == 1) {
-                    mainData = Object.assign([], sortedDataUpDown);
-                    showtoDisplay(mainData);
-                } else {
-                    mainData = Object.assign([], sortedDataDownUp);
-                    showtoDisplay(mainData);
+            tags = [];
+            if(headerTags.length > 0) {
+                for(let iTag = 0; iTag < headerTags.length; iTag++) {
+                    tags.push(headerTags[iTag].innerText);
                 }
-            });
+            }
+
+            //"Business","Culture","Politics"
+
+            for(let i = 0; i < sortedByTags.length; i++) {
+                for(let k = 0; k < tags.length; k++) {
+                    for(let j = 0; j < sortedByTags[i].tags.length; j++) {
+                        if(sortedByTags[i].tags[j].toLowerCase() == tags[k].toLowerCase()) {
+                            sortedByTags[i].coincidence += 1;
+                        }
+                    }
+                }
+            }
+
+            sortedByTags.sort(compareTags)
+            let sosortedByTagsandDate = [];
+
+            for(let i = sortedByTags[0].coincidence; i >= 0; i--) {
+                let arrayforsorting = [];
+                for(let j = 0; j < sortedByTags.length; j++) {
+                    if(i == sortedByTags[j].coincidence) {
+                        arrayforsorting.push(sortedByTags[j]);
+                    }
+                }
+                arrayforsorting.sort(compareDateUpDown);
+
+                for(let k = 0; k < arrayforsorting.length; k++) {
+                    sosortedByTagsandDate.push(arrayforsorting[k]);
+                }
+            }
+
+            mainData = Object.assign([], sosortedByTagsandDate);
+
+            showtoDisplay(mainData);
         }
+
+        selectSort.addEventListener("click", function() {
+            if(selectSort.value == 1) {
+                showtoDisplay(mainData.sort(compareDateUpDown));
+            } else {
+                showtoDisplay(mainData.sort(compareDateDownUp));
+            }
+        });
 
         function filterByTyping() {
             var input, filter, title;

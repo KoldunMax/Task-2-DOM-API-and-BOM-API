@@ -139,7 +139,7 @@ fetch("https://api.myjson.com/bins/152f9j")
                         }                        
 
             }
-            window.onscroll = function() {
+            window.addEventListener("scroll", () => {
                 var scrolled = window.pageYOffset || document.documentElement.scrollTop;
 
                 if(!document.getElementById("input-seatch-titles").value) {
@@ -185,7 +185,8 @@ fetch("https://api.myjson.com/bins/152f9j")
                 }
                 
 
-            }
+            })
+
             main.innerHTML = outPut;
             for(let i = 0; i < removeCard.length; i++) {
                 removeCard[i].addEventListener("click", () => {

@@ -145,7 +145,7 @@ fetch("https://api.myjson.com/bins/152f9j")
                         showtoDisplay(mainData, numberOfElement);
                     } 
     
-                    if(document.body.scrollHeight - scrolled < 800 && document.body.scrollWidth >= 1024) {
+                    if(document.body.scrollHeight - scrolled < 1000 && document.body.scrollWidth >= 1024) {
                         numberOfElement += 10;
                         showtoDisplay(mainData, numberOfElement);
                     } 

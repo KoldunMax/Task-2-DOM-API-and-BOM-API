@@ -61,6 +61,8 @@ fetch("https://api.myjson.com/bins/152f9j")
             return date2 - date1;
         }
         let numberOfElement = 10;
+        var checkedScroll = null;
+
 
         if(localStorage.getItem('typeSorting') == "Recently Updated") {
             mainData.sort(compareDateUpDown);
@@ -84,6 +86,7 @@ fetch("https://api.myjson.com/bins/152f9j")
         function showtoDisplay(arrayForShow, numberOfPosts) {
             let outPut = "";
             for(let i = 0; i < arrayForShow.length; i++) {
+
                         if(numberOfElement==0) {
                             numberOfElement = 10;
                         }
@@ -134,56 +137,8 @@ fetch("https://api.myjson.com/bins/152f9j")
                         }                        
 
             }
+
             
-            window.addEventListener("scroll", () => {
-                var scrolled = window.pageYOffset || document.documentElement.scrollTop;
-
-                if(!document.getElementById("input-seatch-titles").value) {
-
-                    if(document.body.scrollHeight - scrolled > 1800 && document.body.scrollWidth >= 1024) {
-                        numberOfElement -= 10;
-                        showtoDisplay(mainData, numberOfElement);
-                    } 
-    
-                    if(document.body.scrollHeight - scrolled < 1000 && document.body.scrollWidth >= 1024) {
-                        numberOfElement += 10;
-                        showtoDisplay(mainData, numberOfElement);
-                    } 
-                    
-                    if(document.body.scrollHeight - scrolled > 3200 && document.body.scrollWidth >= 768 && document.body.scrollWidth < 1024) {
-                        numberOfElement -= 10;
-                        showtoDisplay(mainData, numberOfElement);
-                    }
-
-                    if(document.body.scrollHeight - scrolled < 500 && document.body.scrollWidth >= 768 && document.body.scrollWidth < 1024) {
-                        numberOfElement += 10;
-                        showtoDisplay(mainData, numberOfElement);
-                    } 
-
-                    if(document.body.scrollHeight - scrolled > 5500 && document.body.scrollWidth >= 425 && document.body.scrollWidth < 768) {
-                        numberOfElement -= 10;
-                        showtoDisplay(mainData, numberOfElement);
-                    }
-
-                    if(document.body.scrollHeight - scrolled < 600 && document.body.scrollWidth >= 425 && document.body.scrollWidth < 768) {
-                        numberOfElement += 10;
-                        showtoDisplay(mainData, numberOfElement);
-                    } 
-
-                    if(document.body.scrollHeight - scrolled > 5500 && document.body.scrollWidth >= 320 && document.body.scrollWidth < 768) {
-                        numberOfElement -= 10;
-                        showtoDisplay(mainData, numberOfElement);
-                    }
-
-                    if(document.body.scrollHeight - scrolled < 600 && document.body.scrollWidth >= 320 && document.body.scrollWidth < 768) {
-                        numberOfElement += 10;
-                        showtoDisplay(mainData, numberOfElement);
-                    } 
-                     
-                }
-                
-
-            })
 
             main.innerHTML = outPut;
             for(let i = 0; i < removeCard.length; i++) {
@@ -193,8 +148,7 @@ fetch("https://api.myjson.com/bins/152f9j")
                         showtoDisplay(mainData);
                     }
                 });
-            }
-    
+            }    
         }
 
         selectSort.addEventListener("click", function() {
@@ -214,12 +168,13 @@ fetch("https://api.myjson.com/bins/152f9j")
         startSorting.addEventListener("click", sortedByTagsFunc);
 
 
-        function sortedByTagsFunc() {
+        function sortedByTagsFunc(e) {
 
             if(localStorage.getItem('typeSorting') !=  "Sort by tags") {
                 localStorage.setItem('typeSorting', "Sort by tags");
             }
-
+           
+    
             let sortedByTags = Object.assign([], mainData);
 
             for(let k = 0; k < sortedByTags.length; k++) {
@@ -268,32 +223,101 @@ fetch("https://api.myjson.com/bins/152f9j")
         // Fast finding used DOM elements directly
 
         function filterByTyping() {
-            var input, filter, title;
-            var progileCard = document.getElementsByClassName("wrapper-profile-card");
+            var input, filter;
             input = document.getElementById("input-seatch-titles");
             filter = input.value.toUpperCase();
-            titles = document.getElementsByClassName("title-profile");
-            progileCard[0].style.display = "none";
-            for (let i = 0; i < titles.length; i++) {
-                if (titles[i].innerText.toUpperCase().indexOf(filter) > -1 || filter.length == 0) {
-                    progileCard[i].style.display = "grid";
-                    progileCard[i].getElementsByClassName("remove-card-btn")[0].addEventListener("click", (e) => {
-                        if(progileCard[i].style.display == "grid") {
-                            mainData.splice(i, 1);
-                            showtoDisplay(mainData);
-                            filterByTyping();
-                            progileCard[i].style.display = "none";
+            var sortMassive = [];
+            for (let i = 0; i < mainData.length; i++) {
+                if (mainData[i].title.toUpperCase().indexOf(filter) > -1) {
+                    sortMassive.push(mainData[i]);
+                } 
+            }
+
+            console.log(mainData);
+
+
+            showtoDisplay(sortMassive);
+            var profileCard = document.getElementsByClassName("wrapper-profile-card");
+            localUpdate();
+
+            function localUpdate() {
+                for(let i = 0; i < profileCard.length; i++) {
+                    profileCard[i].getElementsByClassName("remove-card-btn")[0].addEventListener("click", () => {
+                        
+                        var result = profileCard[i].getElementsByClassName("title-profile")[0].innerText;
+                        result = result.substr(1);
+                        for(let j = 0; j < mainData.length; j++) {
+                            if(mainData[j].title.toUpperCase()  ==  result.toUpperCase()){
+                                mainData.splice(j, 1);
+                            }
                         }
+
+                        for(let j = 0; j < sortMassive.length; j++) {
+                            if(sortMassive[j].title.toUpperCase()  ==  result.toUpperCase()){
+                                sortMassive.splice(j, 1);
+                                showtoDisplay(sortMassive);
+                            }
+                        }
+
+                        localUpdate();
                     });
-                } else {
-                    progileCard[i].style.display = "none";
                 }
             }
+                
         }
 
         //Omnis officiis quaerat explicabo.
         
         document.getElementById("input-seatch-titles").addEventListener("keyup", filterByTyping);
+
+        window.addEventListener("scroll", () => {
+            
+            var scrolled = window.pageYOffset || document.documentElement.scrollTop;
+        
+            if(!document.getElementById("input-seatch-titles").value) {
+        
+                if(document.body.scrollHeight - scrolled > 1800 && document.body.scrollWidth >= 1024) {
+                    numberOfElement -= 10;
+                    showtoDisplay(mainData, numberOfElement);
+                } 
+        
+                if(document.body.scrollHeight - scrolled < 1000 && document.body.scrollWidth >= 1024) {
+                    numberOfElement += 10;
+                    showtoDisplay(mainData, numberOfElement);
+                } 
+                
+                if(document.body.scrollHeight - scrolled > 3200 && document.body.scrollWidth >= 768 && document.body.scrollWidth < 1024) {
+                    numberOfElement -= 10;
+                    showtoDisplay(mainData, numberOfElement);
+                }
+        
+                if(document.body.scrollHeight - scrolled < 500 && document.body.scrollWidth >= 768 && document.body.scrollWidth < 1024) {
+                    numberOfElement += 10;
+                    showtoDisplay(mainData, numberOfElement);
+                } 
+        
+                if(document.body.scrollHeight - scrolled > 5500 && document.body.scrollWidth >= 425 && document.body.scrollWidth < 768) {
+                    numberOfElement -= 10;
+                    showtoDisplay(mainData, numberOfElement);
+                }
+        
+                if(document.body.scrollHeight - scrolled < 600 && document.body.scrollWidth >= 425 && document.body.scrollWidth < 768) {
+                    numberOfElement += 10;
+                    showtoDisplay(mainData, numberOfElement);
+                } 
+        
+                if(document.body.scrollHeight - scrolled > 5500 && document.body.scrollWidth >= 320 && document.body.scrollWidth < 768) {
+                    numberOfElement -= 10;
+                    showtoDisplay(mainData, numberOfElement);
+                }
+        
+                if(document.body.scrollHeight - scrolled < 600 && document.body.scrollWidth >= 320 && document.body.scrollWidth < 768) {
+                    numberOfElement += 10;
+                    showtoDisplay(mainData, numberOfElement);
+                } 
+                 
+            }
+        })
 
     })
     .catch((err) => console.log(err))

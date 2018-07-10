@@ -1,5 +1,3 @@
-// Getting data and record everything to an array
- 
 var arrOfdataProfiles = null;
 var main = document.getElementsByTagName("main")[0];
 var selectSort = document.getElementsByName("slct")[0];
@@ -35,7 +33,6 @@ fetch("https://api.myjson.com/bins/152f9j")
         }
 
         wrapperTags.addEventListener("click", () => {
-            console.log(headerTags);
             let localMassive = [];
             if(headerTags.length > 0) {
                 for(let iTag = 0; iTag < headerTags.length; iTag++) {
@@ -45,7 +42,6 @@ fetch("https://api.myjson.com/bins/152f9j")
             localStorage.setItem('tags', localMassive)
         })
 
-        console.log(localStorage.getItem('typeSorting'));
 
         let mainData = Object.assign([], info["data"]);
 
@@ -86,8 +82,7 @@ fetch("https://api.myjson.com/bins/152f9j")
         }
         
         function showtoDisplay(arrayForShow, numberOfPosts) {
-            let outPut = "";//`<div class="wrapper-profile-cards">`;
-            console.log(arrayForShow.length);
+            let outPut = "";
             for(let i = 0; i < arrayForShow.length; i++) {
                         if(numberOfElement==0) {
                             numberOfElement = 10;
@@ -196,17 +191,6 @@ fetch("https://api.myjson.com/bins/152f9j")
                     }
                 });
             }
-
-            /* 
-
-                for(let i = 0; i < mainData.length; i++) {
-                    removeCard[i].addEventListener("click", () => {
-                        mainData.splice(i, 1);
-                        showtoDisplay(mainData);
-                    });
-                }
-
-            */
     
         }
 
@@ -245,8 +229,6 @@ fetch("https://api.myjson.com/bins/152f9j")
                     tags.push(headerTags[iTag].innerText);
                 }
             }
-
-            //"Business","Culture","Politics"
 
             for(let i = 0; i < sortedByTags.length; i++) {
                 for(let k = 0; k < tags.length; k++) {
@@ -293,7 +275,6 @@ fetch("https://api.myjson.com/bins/152f9j")
                 if (titles[i].innerText.toUpperCase().indexOf(filter) > -1 || filter.length == 0) {
                     progileCard[i].style.display = "grid";
                     progileCard[i].getElementsByClassName("remove-card-btn")[0].addEventListener("click", (e) => {
-                        console.log(progileCard[i]);
                         if(progileCard[i].style.display == "grid") {
                             mainData.splice(i, 1);
                             showtoDisplay(mainData);

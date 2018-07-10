@@ -139,15 +139,17 @@ fetch("https://api.myjson.com/bins/152f9j")
                 var scrolled = window.pageYOffset || document.documentElement.scrollTop;
 
                 if(!document.getElementById("input-seatch-titles").value) {
-                    if(document.body.scrollHeight - scrolled < 800 && document.body.scrollWidth >= 1024) {
-                        numberOfElement += 10;
-                        showtoDisplay(mainData, numberOfElement);
-                    } 
-                    if(document.body.scrollHeight - scrolled > 1700 && document.body.scrollWidth >= 1024) {
+
+                    if(document.body.scrollHeight - scrolled > 1800 && document.body.scrollWidth >= 1024) {
                         numberOfElement -= 10;
                         showtoDisplay(mainData, numberOfElement);
                     } 
     
+                    if(document.body.scrollHeight - scrolled < 800 && document.body.scrollWidth >= 1024) {
+                        numberOfElement += 10;
+                        showtoDisplay(mainData, numberOfElement);
+                    } 
+                    
                     if(document.body.scrollHeight - scrolled > 3200 && document.body.scrollWidth >= 768 && document.body.scrollWidth < 1024) {
                         numberOfElement -= 10;
                         showtoDisplay(mainData, numberOfElement);

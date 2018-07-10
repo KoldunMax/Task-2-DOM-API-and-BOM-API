@@ -142,10 +142,6 @@ fetch("https://api.myjson.com/bins/152f9j")
             window.onscroll = function() {
                 var scrolled = window.pageYOffset || document.documentElement.scrollTop;
 
-                console.log(scrolled);
-                console.log(document.body.scrollHeight);
-                console.log(numberOfElement);
-
                 if(!document.getElementById("input-seatch-titles").value) {
                     if(document.body.scrollHeight - scrolled < 800 && document.body.scrollWidth >= 1024) {
                         numberOfElement += 10;
@@ -161,8 +157,6 @@ fetch("https://api.myjson.com/bins/152f9j")
                         showtoDisplay(mainData, numberOfElement);
                     }
 
-                    
-    
                     if(document.body.scrollHeight - scrolled < 500 && document.body.scrollWidth >= 768 && document.body.scrollWidth < 1024) {
                         numberOfElement += 10;
                         showtoDisplay(mainData, numberOfElement);

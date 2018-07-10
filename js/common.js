@@ -134,6 +134,7 @@ fetch("https://api.myjson.com/bins/152f9j")
                         }                        
 
             }
+            
             window.addEventListener("scroll", () => {
                 var scrolled = window.pageYOffset || document.documentElement.scrollTop;
 

@@ -7,6 +7,21 @@ var startSorting = document.getElementsByClassName("start-sorted-tags")[0];
 var headerTags = document.getElementsByClassName("tag");
 var options = selectSort.getElementsByTagName("option")
 var removeCard = document.getElementsByClassName("remove-card-btn");
+var tagsInput = document.getElementsByClassName("tags-input")[0];
+var wrapperTags = document.getElementsByClassName("tags-wrapper")[0];
+
+if(localStorage.getItem('tags')) {
+    tagsInput.innerHTML = "";
+    var getItems = localStorage.getItem('tags').split(",");
+    
+    for(let i = 0; i < getItems.length; i++) {
+        tagsInput.innerHTML += `<span class="tag">${getItems[i]}<span class="close"></span></span>`;
+    }
+}
+
+if(!localStorage.getItem('typeSorting')) {
+    localStorage.setItem('typeSorting', "Recently Updated");
+}
 
 fetch("https://api.myjson.com/bins/152f9j")
     .then((res) => res.json())
@@ -17,10 +32,21 @@ fetch("https://api.myjson.com/bins/152f9j")
             for(let iTag = 0; iTag < headerTags.length; iTag++) {
                 tags.push(headerTags[iTag].innerText);
             }
-
-            console.log(tags);
         }
-        
+
+        wrapperTags.addEventListener("click", () => {
+            console.log(headerTags);
+            let localMassive = [];
+            if(headerTags.length > 0) {
+                for(let iTag = 0; iTag < headerTags.length; iTag++) {
+                    localMassive.push(headerTags[iTag].innerText);
+                }
+            }
+            localStorage.setItem('tags', localMassive)
+        })
+
+        console.log(localStorage.getItem('typeSorting'));
+
         let mainData = Object.assign([], info["data"]);
 
         function compareDateUpDown(A, B) {
@@ -29,34 +55,35 @@ fetch("https://api.myjson.com/bins/152f9j")
             var date2 = new Date(B.createdAt);
 
             return date1 - date2;
-        }        
+        }  
+
         function compareDateDownUp(A, B) {
 
             var date1 = new Date(A.createdAt);
             var date2 = new Date(B.createdAt);
 
             return date2 - date1;
-        }//coincidence
+        }
+        let numberOfElement = 10;
 
-        mainData.sort(compareDateUpDown);
+        if(localStorage.getItem('typeSorting') == "Recently Updated") {
+            mainData.sort(compareDateUpDown);
+            showtoDisplay(mainData, numberOfElement);
+        }
+
+        if(localStorage.getItem('typeSorting') == "Least Recently Updated") {
+            mainData.sort(compareDateDownUp);
+            showtoDisplay(mainData, numberOfElement);
+        }
+
+        if(localStorage.getItem('typeSorting') == "Sort by tags") {
+            sortedByTagsFunc();
+        }
+
 
         function compareTags(A, B) {
             return B.coincidence - A.coincidence;
         }
-        let numberOfElement = 10;
-
-        showtoDisplay(mainData, numberOfElement);
-
-
- /*       for(let i = 0; i < removeCard.length; i++) {
-            removeCard[i].addEventListener("click", () => {
-                if(!document.getElementById("input-seatch-titles").value){
-                    mainData.splice(i, 1);
-                    showtoDisplay(mainData);
-                }
-            });
-        }
-        */
         
         function showtoDisplay(arrayForShow, numberOfPosts) {
             let outPut = "";//`<div class="wrapper-profile-cards">`;
@@ -191,14 +218,25 @@ fetch("https://api.myjson.com/bins/152f9j")
         selectSort.addEventListener("click", function() {
             if(selectSort.value == 1) {
                 showtoDisplay(mainData.sort(compareDateUpDown));
+                if(localStorage.getItem('typeSorting') !=  "Recently Updated") {
+                    localStorage.setItem('typeSorting', "Recently Updated");
+                }
             } else {
+                if(localStorage.getItem('typeSorting') !=  "Least Recently Updated") {
+                    localStorage.setItem('typeSorting', "Least Recently Updated");
+                }
                 showtoDisplay(mainData.sort(compareDateDownUp));
             }
         });
 
         startSorting.addEventListener("click", sortedByTagsFunc);
 
+
         function sortedByTagsFunc() {
+
+            if(localStorage.getItem('typeSorting') !=  "Sort by tags") {
+                localStorage.setItem('typeSorting', "Sort by tags");
+            }
 
             let sortedByTags = Object.assign([], mainData);
 
